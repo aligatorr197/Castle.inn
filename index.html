@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castle - Entertainment App</title>
+    <style>
+        /* Base Reset & Variables */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        body { 
+            background-color: #0f0f13; 
+            color: #ffffff; 
+            line-height: 1.6; 
+        }
+        a { 
+            text-decoration: none; 
+            color: inherit; 
+        }
+        
+        /* Navbar Styling */
+        header { 
+            background-color: #1c1c24; 
+            padding: 1rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5); 
+        }
+        .logo { 
+            font-size: 1.8rem; 
+            font-weight: bold; 
+            color: #e50914; 
+            letter-spacing: 1px;
+        }
+        nav ul { 
+            list-style: none; 
+            display: flex; 
+            gap: 2rem; 
+        }
+        nav ul li a {
+            font-weight: 500;
+        }
+        nav ul li a:hover { 
+            color: #e50914; 
+            transition: color 0.3s ease; 
+        }
+        
+        /* Hero Section */
+        .hero { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            padding: 6rem 5%; 
+            /* Placeholder background image from Unsplash */
+            background: linear-gradient(rgba(15, 15, 19, 0.85), rgba(15, 15, 19, 1)), url('https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=80') center/cover; 
+            min-height: 75vh; 
+        }
+        .hero h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 1rem; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero p { 
+            font-size: 1.2rem; 
+            margin-bottom: 2.5rem; 
+            color: #d1d1d1; 
+            max-width: 600px; 
+        }
+        .btn { 
+            background-color: #e50914; 
+            color: white; 
+            padding: 1rem 2.5rem; 
+            border-radius: 30px; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            transition: all 0.3s ease; 
+            border: none; 
+            cursor: pointer; 
+            display: inline-block; 
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+        }
+        .btn:hover { 
+            background-color: #f40612; 
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6);
+        }
+
+        /* Features Section */
+        .features { 
+            padding: 5rem 5%; 
+            text-align: center; 
+        }
+        .features h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 3rem; 
+        }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 2rem; 
+        }
+        .card { 
+            background-color: #1c1c24; 
+            padding: 2.5rem 2rem; 
+            border-radius: 12px; 
+            transition: transform 0.3s ease, background-color 0.3s ease; 
+            border: 1px solid #2a2a35;
+        }
+        .card:hover { 
+            transform: translateY(-10px); 
+            background-color: #252530; 
+            border-color: #e50914;
+        }
+        .card h3 { 
+            font-size: 1.5rem; 
+            margin-bottom: 1rem; 
+            color: #e50914; 
+        }
+        .card p { 
+            color: #aaaaaa; 
+        }
+
+        /* Footer */
+        footer { 
+            background-color: #050505; 
+            padding: 2rem 5%; 
+            text-align: center; 
+            color: #666666; 
+            margin-top: 2rem; 
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            nav ul { 
+                display: none; /* Hide nav links on small screens for simplicity */
+            }
+            .hero h1 { 
+                font-size: 2.5rem; 
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">CastleApp</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>Stream Your Favorite Content</h1>
+        <p>Watch movies, live sports, and TV shows on the go. Download the latest version of the app for Android and enjoy limitless entertainment.</p>
+        <a href="#download" class="btn">Download APK (v1.0)</a>
+    </section>
+
+    <section class="features" id="features">
+        <h2>Why Choose CastleApp?</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>HD Streaming</h3>
+                <p>Experience your favorite movies and shows in crystal-clear high definition without buffering.</p>
+            </div>
+            <div class="card">
+                <h3>Live Sports & News</h3>
+                <p>Stay updated with live broadcasts of top sports events and global news channels 24/7.</p>
+            </div>
+            <div class="card">
+                <h3>User Friendly Interface</h3>
+                <p>A sleek, intuitive design curated to help you find exactly what you want to watch in seconds.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 CastleApp Entertainment. All rights reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Disclaimer: Ensure all hosted content complies with regional copyright and licensing laws.</p>
+    </footer>
+
+</body>
+</html>
