@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Rebuilt Interface</title>
+    <style>
+        /* --- Advanced CSS --- */
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --primary: #3b82f6;
+            --secondary: #8b5cf6;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Light Theme Variable Overrides */
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --glass-bg: rgba(0, 0, 0, 0.05);
+            --glass-border: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Header */
+        header {
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        button.theme-toggle {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        button.theme-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(128, 128, 128, 0.2);
+        }
+
+        /* Hero Section */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 5rem 2rem;
+            width: 100%;
+            max-width: 1200px;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 5vw, 5rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            animation: slideUp 1s ease-out;
+        }
+
+        /* Interactive Grid System */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dynamic Mouse Follower */
+        .cursor-glow {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--primary) 0%, rgba(0,0,0,0) 60%);
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            opacity: 0.15;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s;
+        }
+
+        [data-theme="light"] .cursor-glow {
+            mix-blend-mode: multiply;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-glow" id="glow"></div>
+
+    <header>
+        <div class="logo">Advance Build</div>
+        <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">Toggle Light Mode</button>
+    </header>
+
+    <main>
+        <h1>Next-Gen Web Interface</h1>
+        <p class="subtitle">Featuring advanced glassmorphism CSS, dynamic color variables, and interactive DOM manipulation via JavaScript.</p>
+        
+        <div class="grid-container" id="cardContainer">
+            </div>
+    </main>
+
+    <script>
+        // --- Advanced JavaScript --- //
+
+        // 1. Dynamic Theming Logic
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeBtn');
+            if (body.getAttribute('data-theme') === 'light') {
+                body.removeAttribute('data-theme');
+                btn.textContent = 'Toggle Light Mode';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                btn.textContent = 'Toggle Dark Mode';
+            }
+        }
+
+        // 2. Dynamically Injecting "New Code" Elements
+        const newFeatures = [
+            { 
+                title: 'Dynamic DOM Injection', 
+                desc: 'These cards are not written in HTML. They are generated efficiently using pure JavaScript arrays and loops at runtime.' 
+            },
+            { 
+                title: 'Glassmorphism UI', 
+                desc: 'Uses backdrop-filter and semi-transparent RGBA borders to create a sleek frosted-glass effect over the page background.' 
+            },
+            { 
+                title: 'Mouse Glow Tracking', 
+                desc: 'Move your cursor! A radial gradient follows your mouse around the screen using event listeners and CSS translations.' 
+            }
+        ];
+
+        const container = document.getElementById('cardContainer');
+        
+        // Loop through array and build HTML components
+        newFeatures.forEach((feature, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            // Stagger the slide up animation using Javascript
+            card.style.animation = `slideUp ${1 + index * 0.2}s ease-out`;
+            
+            const title = document.createElement('h3');
+            title.textContent = feature.title;
+            
+            const desc = document.createElement('p');
+            desc.textContent = feature.desc;
+            
+            card.appendChild(title);
+            card.appendChild(desc);
+            container.appendChild(card);
+            
+            // Add custom click animation
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-10px)';
+                }, 150);
+            });
+        });
+
+        // 3. Mouse Follower Effect Logic
+        const glow = document.getElementById('glow');
+        window.addEventListener('mousemove', (e) => {
+            // Update position to track mouse coordinates
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+    </script>
+</body>
+</html>
+
